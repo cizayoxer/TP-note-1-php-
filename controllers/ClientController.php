@@ -12,10 +12,14 @@ class ClientController extends WebController
     function __construct(){
         $this->modeleClients = new ClientsModele();
     }
-    function liste()
+
+    function liste($page = 0, $recherche = ""): string
     {
-        $listeClient = $this->modeleClients->liste();
-        return Template::render("views/liste.php", array($listeClient));
+        $listeClient = $this->modeleClients->recherche($recherche,10, $page);
+        return Template::render(
+            "views/liste.php",
+            array("page" => $page, 'listeClient' => $listeClient, 'recherche' => $recherche)
+        );
     }
 
 }
