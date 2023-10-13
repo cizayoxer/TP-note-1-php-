@@ -2,12 +2,19 @@
 namespace controllers;
 
 use controllers\base\WebController;
+use models\ClientsModele;
 
 class FicheClientController extends WebController
 {
-    public function fiche($id="")
+    private $modeleClients;
+    function __construct(){
+        $this->modeleClients = new ClientsModele();
+    }
+    public function fiche(int $id=0) : string
     {
         // À compléter avec les bons appels de méthode.
-        return Template::render("views/fiche/client", []);
+        $client = $this->modeleClients->getByClientId($id);
+
+        return Template::render("views/client.php", ['client' => $client]);
     }
 }
