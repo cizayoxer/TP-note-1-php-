@@ -3,22 +3,19 @@
 
     <!-- Informations du client -->
     <h2>Informations du client</h2>
-    <?php
-        /** @var Client[] $client */
 
-        use models\classes\Client;
-    ?>
 
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title"><?php echo $client.getPrenom() . ' ' . $client.getNom(); ?></h5>
-            <p class="card-text">Téléphone: <?php echo $client.getTelephone(); ?></p>
-            <p class="card-text">Email: <?php echo $client.getEmail(); ?></p>
+            <h5 class="card-title"><?php echo $client->getPrenom() . ' ' . $client->getNom(); ?></h5>
+            <p class="card-text">Téléphone: <?php echo $client->getTelephone(); ?></p>
+            <p class="card-text">Email: <?php echo $client->getEmail(); ?></p>
         </div>
     </div>
-<?php /*
+
     <!-- Produits -->
-    <h2 class="mt-5">Les produits</h2>
+    <h2 class="mt-5">Les produits <a href="/client/produit/<?=$id?>" class="btn btn-primary ml-auto">Ajouter un produit</a></h2>
+
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -32,25 +29,22 @@
         <tbody>
         <?php
         // Encore une fois, c'est juste un exemple
-        $produits = [
-            ['id' => 1, 'nom' => 'Produit 1', 'description' => 'Description produit 1', 'prix' => '100€', 'date' => '10/10/2021'],
-            ['id' => 2, 'nom' => 'Produit 2', 'description' => 'Description produit 2', 'prix' => '150€', 'date' => '05/10/2021'],
-        ];
+        $produits = $client->lesProduits();
 
         foreach ($produits as $produit) { ?>
             <tr>
-                <td><?php echo $produit['id']; ?></td>
-                <td><?php echo $produit['nom']; ?></td>
-                <td><?php echo $produit['description']; ?></td>
-                <td><?php echo $produit['prix']; ?></td>
-                <td><?php echo $produit['date']; ?></td>
+                <td><?php echo $produit->getId(); ?></td>
+                <td><?php echo $produit->getNom(); ?></td>
+                <td><?php echo $produit->getDescription(); ?></td>
+                <td><?php echo $produit->getPrix(); ?></td>
+                <td><?php echo "00-00-0000"; ?></td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
 
     <!-- Adresses -->
-    <h2 class="mt-5">Les adresses</h2>
+    <h2 class="mt-5">Les adresses<a href="/produit" class="btn btn-primary ml-auto">Ajouter une adresse</a></h2>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -63,22 +57,19 @@
         <tbody>
         <?php
         // Encore une fois, c'est juste un exemple
-        $adresses = [
-            ['nom' => 'Maison', 'rue' => 'Rue de la Liberté', 'code_postal' => '75000', 'ville' => 'Paris'],
-            ['nom' => 'Bureau', 'rue' => 'Rue du Travail', 'code_postal' => '75001', 'ville' => 'Paris'],
-        ];
+    $adresses = $client->lesAdresses();
 
         foreach ($adresses as $adresse) { ?>
             <tr>
-                <td><?php echo $adresse['nom']; ?></td>
-                <td><?php echo $adresse['rue']; ?></td>
-                <td><?php echo $adresse['code_postal']; ?></td>
-                <td><?php echo $adresse['ville']; ?></td>
+                <td><?php echo $adresse->getNom(); ?></td>
+                <td><?php echo $adresse->getRue(); ?></td>
+                <td><?php echo $adresse->getCodePostal(); ?></td>
+                <td><?php echo $adresse->getVille(); ?></td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
-</div>*/ ?>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
