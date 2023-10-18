@@ -6,7 +6,6 @@
     <div class="form-group">
         <input type="text" class="form-control" id="recherche" name="recherche" value="<?php echo $recherche;?>" placeholder="Recherche">
     </div>
-
 </form>
 <div class="container mt-5">
 
@@ -26,7 +25,7 @@
         use models\classes\Client;
 
         foreach ($listeClient as $client){ ?>
-            <tr>
+            <tr onclick="window.location.href='/client/<?php echo $client->getId(); ?>';" style="cursor:pointer;">
                 <td><?php echo $client->getId(); ?></td>
                 <td><?php echo $client->getPrenom() . " " . $client->getNom() ; ?></td>
                 <td><?php echo $client->getTelephone(); ?></td>
@@ -39,14 +38,10 @@
         <a href="/client?page=<?= $page+1?><?php if($recherche!="") {echo "&recherche=".$recherche;}?>" class="btn btn-primary">&#8594</a>
     <?php }
     else{?>
-
         <a href="/client?page=<?= $page-1?><?php if($recherche!="") {echo "&recherche=".$recherche;}?>" class="btn btn-primary">&#8592</a>
         <a href="/client?page=<?= $page+1?><?php if($recherche!="") {echo "&recherche=".$recherche;}?>" class="btn btn-primary">&#8594</a>
     <?php } ?>
-
-
-
-</div>;
+</div>
 
 </body>
 </html>

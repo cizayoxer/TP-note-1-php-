@@ -3,6 +3,7 @@ namespace controllers;
 
 use controllers\base\WebController;
 use models\ClientsModele;
+use utils\Template;
 
 class FicheClientController extends WebController
 {
