@@ -14,7 +14,11 @@
     </div>
 
     <!-- Produits -->
-    <h2 class="mt-5">Les produits <a href="/client/produit/<?=$id?>" class="btn btn-primary ml-auto">Ajouter un produit</a></h2>
+    <form action="/client/<?=$id?>/produit" method="post">
+        <input type="hidden" value="<?=$id?>" name="idCli" class="btn btn-primary ml-auto">
+
+    <h2 class="mt-5">Les produits <input type="submit" class="btn btn-primary ml-auto" value="Commander">  </h2>
+    </form>
 
     <table class="table table-bordered table-hover">
         <thead>
@@ -23,7 +27,7 @@
             <th>Nom Produit</th>
             <th>Description</th>
             <th>Prix</th>
-            <th>Créé le</th>
+            <th>Suppression</th>
         </tr>
         </thead>
         <tbody>
@@ -37,14 +41,21 @@
                 <td><?php echo $produit->getNom(); ?></td>
                 <td><?php echo $produit->getDescription(); ?></td>
                 <td><?php echo $produit->getPrix(); ?></td>
-                <td><?php echo "00-00-0000"; ?></td>
+                <td>
+                    <form action="/client/produit/delete" method="post">
+                        <input type="hidden" value="<?=$produit->getId()?>" name="idProduit">
+                        <input type="hidden" value="<?=$id?>" name="idCli">
+                        <input type="submit" value="Supprimer" name="Supprimer" class="btn btn-primary ml-auto">
+                    </form>
+                </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
 
     <!-- Adresses -->
-    <h2 class="mt-5">Les adresses<a href="/produit" class="btn btn-primary ml-auto">Ajouter une adresse</a></h2>
+
+    <h2 class="mt-5">Les adresses<a href="/client/adresse" class="btn btn-primary ml-auto">Ajouter une adresse</a></h2>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -70,6 +81,9 @@
         </tbody>
     </table>
 </div>
+<form method="post">
+    <input type="hidden" value="<?=$id?>" name="idCli">
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>

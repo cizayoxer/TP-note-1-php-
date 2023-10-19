@@ -68,8 +68,25 @@ class ProduitsModele extends SQL
      * @return void
      */
     public function affecterProduit(int $idProduit, int $idClient){
-        $query = "INSERT INTO commander(idProduit, idClient) VALUE (?, ?)";
+        $query = "INSERT INTO commander(idClient, idProduit) VALUE (?, ?)";
         $stmt = SQL::getPdo()->prepare($query);
         $stmt->execute([$idClient, $idProduit]);
+    }
+
+    public function allProduits(): array
+    {
+        $query = "SELECT * FROM produit ;";
+
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([
+
+        ]);
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Produit::class);
+    }
+    public function detacherProduit(int $idProduit, int $idClient){
+        $query = "DELETE FROM commander WHERE `commander`.`idProduit` = ? AND `commander`.`idClient` = ?";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([$idProduit,$idClient]);
     }
 }

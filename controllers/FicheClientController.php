@@ -16,6 +16,6 @@ class FicheClientController extends WebController
         // À compléter avec les bons appels de méthode.
         $client = $this->modeleClients->getByClientId($id);
 
-        return Template::render("views/client.php", ['client' => $client]);
+        return Template::render("views/client.php", ['client' => $client, 'id' => $id]);
     }
 }

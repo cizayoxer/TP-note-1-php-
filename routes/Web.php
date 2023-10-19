@@ -5,6 +5,7 @@ namespace routes;
 use controllers\ClientController;
 use controllers\FicheClientController;
 use controllers\SampleWebController;
+use controllers\ProduitController;
 use models\ClientsModele;
 use routes\base\Route;
 use utils\Template;
@@ -16,6 +17,7 @@ class Web
         $main = new SampleWebController();
         $client = new ClientController();
         $fiche = new FicheClientController();
+        $produit = new ProduitController();
 
         // Appel la méthode « home » dans le contrôleur $main.
         Route::Add('/', [$main, 'home']);
@@ -28,7 +30,12 @@ class Web
             return Template::render('views/global/about.php');
         });
         Route::Add('/client', [$client, 'liste']);
+        Route::Add('/client/produit/execute', [$produit, 'ajouterProduitCli']);
+        Route::Add('/client/produit/delete', [$produit, 'supprimerProduitCli']);
+        Route::Add('/client/{id}/adresse', [$adresse, 'liste']);
+        Route::Add('/client/{id}/produit', [$produit, 'liste']);
         Route::Add('/client/{id}', [$fiche, 'fiche']);
+
 
         //        Exemple de limitation d'accès à une page en fonction de la SESSION.
         //        if (SessionHelpers::isLogin()) {
