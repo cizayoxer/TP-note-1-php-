@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
 
 <body>
 <form method="get" action="/client">

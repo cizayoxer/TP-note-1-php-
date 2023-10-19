@@ -1,7 +1,7 @@
 <?php
 namespace models\classes;
 
-use models\AdresseModel;
+use models\AdresseModele;
 use models\ProduitsModele;
 
 class Client
@@ -12,12 +12,12 @@ class Client
     private string $email;
     private string $telephone;
     private ProduitsModele $produitModele;
-    private AdresseModel $adresseModele;
+    private AdresseModele $adresseModele;
 
     function __construct()
     {
         $this->produitModele = new ProduitsModele();
-        $this->adresseModele = new AdresseModel();
+        $this->adresseModele = new AdresseModele();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace routes;
 
+use controllers\AdresseController;
 use controllers\ClientController;
 use controllers\FicheClientController;
 use controllers\SampleWebController;
@@ -18,6 +19,7 @@ class Web
         $client = new ClientController();
         $fiche = new FicheClientController();
         $produit = new ProduitController();
+        $adresse = new AdresseController();
 
         // Appel la méthode « home » dans le contrôleur $main.
         Route::Add('/', [$main, 'home']);
@@ -32,7 +34,9 @@ class Web
         Route::Add('/client', [$client, 'liste']);
         Route::Add('/client/produit/execute', [$produit, 'ajouterProduitCli']);
         Route::Add('/client/produit/delete', [$produit, 'supprimerProduitCli']);
-        Route::Add('/client/{id}/adresse', [$adresse, 'liste']);
+        Route::Add('/client/adresse/execute', [$adresse, 'ajouterAdresseCli']);
+        Route::Add('/client/adresse/delete', [$adresse, 'supprimerAdresseCli']);
+        Route::Add('/client/adresse', [$adresse, 'ajouterAdresse']);
         Route::Add('/client/{id}/produit', [$produit, 'liste']);
         Route::Add('/client/{id}', [$fiche, 'fiche']);
 

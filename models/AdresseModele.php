@@ -5,7 +5,7 @@ namespace models;
 use models\base\SQL;
 use models\classes\Adresse;
 
-class AdresseModel extends SQL
+class AdresseModele extends SQL
 {
     public function __construct()
     {
@@ -32,9 +32,14 @@ class AdresseModel extends SQL
      */
     public function creerAdresseClient(Adresse $uneAdresse): string
     {
-        $query = "INSERT INTO adresse (id, nom, rue, codePostal, ville, clientId) VALUE (NULL, ?, ?, ?, ?, clientId)";
+        $query = "INSERT INTO adresse (id, nom, rue, codePostal, ville, clientId) VALUE (NULL, ?, ?, ?, ?, ?)";
         $stmt = SQL::getPdo()->prepare($query);
         $stmt->execute([$uneAdresse->getNom(), $uneAdresse->getRue(), $uneAdresse->getCodePostal(), $uneAdresse->getVille(), $uneAdresse->getClientId()]);
         return $this->getPdo()->lastInsertId();
+    }
+    public function detacherAdresse(int $idAdresse, int $idClient){
+        $query = "DELETE FROM adresse WHERE `adresse`.`id` = ? AND `adresse`.`clientId` = ?";
+        $stmt = SQL::getPdo()->prepare($query);
+        return $stmt->execute([$idAdresse,$idClient]);
     }
 }

@@ -54,8 +54,10 @@
     </table>
 
     <!-- Adresses -->
-
-    <h2 class="mt-5">Les adresses<a href="/client/adresse" class="btn btn-primary ml-auto">Ajouter une adresse</a></h2>
+    <form action="/client/adresse" method="post">
+        <input type="hidden" value="<?=$id?>" name="idCli">
+        <h2 class="mt-5">Les adresses<input type="submit" class="btn btn-primary ml-auto" value="Ajouter une adresse"></h2>
+    </form>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -63,6 +65,7 @@
             <th>Rue</th>
             <th>Code postal</th>
             <th>Ville</th>
+            <th>Suppression</th>
         </tr>
         </thead>
         <tbody>
@@ -76,6 +79,13 @@
                 <td><?php echo $adresse->getRue(); ?></td>
                 <td><?php echo $adresse->getCodePostal(); ?></td>
                 <td><?php echo $adresse->getVille(); ?></td>
+                <td>
+                    <form action="/client/adresse/delete" method="post">
+                        <input type="hidden" value="<?=$adresse->getId()?>" name="idAdresse">
+                        <input type="hidden" value="<?=$id?>" name="idCli">
+                        <input type="submit" value="Supprimer" name="Supprimer" class="btn btn-primary ml-auto">
+                    </form>
+                </td>
             </tr>
         <?php } ?>
         </tbody>
