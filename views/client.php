@@ -8,10 +8,47 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title"><?php echo $client->getPrenom() . ' ' . $client->getNom(); ?></h5>
-            <p class="card-text">Téléphone: <?php echo $client->getTelephone(); ?></p>
-            <p class="card-text">Email: <?php echo $client->getEmail(); ?></p>
         </div>
     </div>
+
+    <!-- Contact -->
+    <form action="/client/contact" method="post">
+        <input type="hidden" value="<?=$id?>" name="idCli" class="btn btn-primary ml-auto">
+
+        <h2 class="mt-5">Les contact <input type="submit" class="btn btn-primary ml-auto" value="Ajouter contact">  </h2>
+    </form>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Nom contact</th>
+            <th>Numéro de téléphone</th>
+            <th>Adresse email</th>
+            <th>Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Encore une fois, c'est juste un exemple
+        $contacts = $client->lesContacts();
+
+        foreach ($contacts as $contact) { ?>
+            <tr>
+                <td><?php echo $contact->getNom(); ?></td>
+                <td><?php echo $contact->getTel(); ?></td>
+                <td><?php echo $contact->getEmail(); ?></td>
+                <td>
+                    <form action="/client/contact/delete" method="post">
+                        <input type="hidden" value="<?=$contact->getNom()?>" name="nomContact">
+                        <input type="hidden" value="<?=$id?>" name="idCli">
+                        <input type="submit" value="Supprimer" name="Supprimer" class="btn btn-primary ml-auto">
+                    </form>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+
 
     <!-- Produits -->
     <form action="/client/<?=$id?>/produit" method="post">

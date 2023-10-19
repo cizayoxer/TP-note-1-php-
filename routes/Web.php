@@ -4,6 +4,7 @@ namespace routes;
 
 use controllers\AdresseController;
 use controllers\ClientController;
+use controllers\ContactController;
 use controllers\FicheClientController;
 use controllers\SampleWebController;
 use controllers\ProduitController;
@@ -20,6 +21,7 @@ class Web
         $fiche = new FicheClientController();
         $produit = new ProduitController();
         $adresse = new AdresseController();
+        $contact = new ContactController();
 
         // Appel la méthode « home » dans le contrôleur $main.
         Route::Add('/', [$main, 'home']);
@@ -32,11 +34,14 @@ class Web
             return Template::render('views/global/about.php');
         });
         Route::Add('/client', [$client, 'liste']);
-        Route::Add('/client/produit/execute', [$produit, 'ajouterProduitCli']);
-        Route::Add('/client/produit/delete', [$produit, 'supprimerProduitCli']);
+        Route::Add('/client/contact/execute', [$contact, 'ajouterContactCli']);
+        Route::Add('/client/contact/delete', [$contact, 'supprimerContactCli']);
+        Route::Add('/client/contact', [$contact, 'ajouterContact']);
         Route::Add('/client/adresse/execute', [$adresse, 'ajouterAdresseCli']);
         Route::Add('/client/adresse/delete', [$adresse, 'supprimerAdresseCli']);
         Route::Add('/client/adresse', [$adresse, 'ajouterAdresse']);
+        Route::Add('/client/produit/execute', [$produit, 'ajouterProduitCli']);
+        Route::Add('/client/produit/delete', [$produit, 'supprimerProduitCli']);
         Route::Add('/client/{id}/produit', [$produit, 'liste']);
         Route::Add('/client/{id}', [$fiche, 'fiche']);
 

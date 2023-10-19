@@ -3,6 +3,7 @@ namespace models\classes;
 
 use models\AdresseModele;
 use models\ProduitsModele;
+use models\ContactModele;
 
 class Client
 {
@@ -14,10 +15,13 @@ class Client
     private ProduitsModele $produitModele;
     private AdresseModele $adresseModele;
 
+    private ContactModele $contactModele;
+
     function __construct()
     {
         $this->produitModele = new ProduitsModele();
         $this->adresseModele = new AdresseModele();
+        $this->contactModele = new ContactModele();
     }
 
     /**
@@ -35,6 +39,11 @@ class Client
     public function lesProduits(): array
     {
         return $this->produitModele->lesProduitsClient($this->id);
+    }
+
+    public function lesContacts(): array
+    {
+        return $this->contactModele->lesContactClient($this->id);
     }
 
     /**
